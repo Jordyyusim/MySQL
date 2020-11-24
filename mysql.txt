@@ -1,0 +1,146 @@
+show database;
+- show all databases
+
+create database databasename;
+- create new database
+
+use databasename;
+- activate the database 
+
+create table tablename;
+- create new table
+
+show tables;
+- show all tables in active database(the one you use)
+
+create table tablename(
+ -> no int,
+ -> name varchar(100),
+ -> age tinyint,
+ -> );
+- no, name, and age are fieldnames
+- int, varchar, tinyint are the types of data
+
+insert into tablename values
+ -> (1,A,20),
+ -> (2,B,22);
+- the value amounts must be the same with fieldname amounts
+
+insert into tablename values
+ -> (3,C,null),
+ -> (4,null,26);
+- null if you want empty the field
+
+insert into tablename(location,gender,etc) values(...,...,...);
+- the values must be in order by its fieldnames
+
+insert into tablename (location) values ('A'), ('B'), ('C');
+
+select * from tablename;
+- show all datas in table
+)
+
+select specific_fields from tablename;
+- show only fieldnames and their datas you wanted to show
+
+create table murid(
+ -> id int not null auto_increment,
+ -> name varchar(255) default 'ABC',
+ -> bod date,
+ -> created_at timestamp default current_timestamp,
+ -> last_update timestamp default current_timestamp on update current_timestamp,
+ -> gender enum('male', 'female'),
+ -> city set('London', 'Birmingham', 'Charlton'),
+ -> email varhcar(100) not null unique
+ -> primary key(id));
+
+- not null = field must be filled
+- auto_increment = field filled by number in order
+- default = when the field is null, sql fill it with the default automatically
+- date = dates(yymmdd -> 2020-04-20)
+- current_timetamp = time now (date and time)
+- on update current_timestamp = latest time you update the fields
+- enum = the field value must be one of them
+- set = the field value can one or more
+- unique = the field value for each data must be different
+- primary key = you cannot edit the field value
+
+select * from tablename where fieldname='';
+- show all datas with specific value 
+
+select * from tablename where fieldname='' and fieldname='';
+- - show all datas with specific values
+
+select * from tablename limit 2;
+- show two first datas
+
+select * from tablename limit 2,3;
+- show three first datas starts from third row
+
+select * from tablename where name like '%a';
+- show all data where fieldname is name and its value ends with -a
+
+select * from tablename where name like 'a%';
+- show all data where fieldname is name and its value starts with a-
+
+select * from tablename where name like '%a%';
+- show all data where fieldname is name and value middle char is -a-
+
+select * from tablename where name not like '%a';
+- show all data where fieldname is name and its value not ends with -a
+
+select count(*) from tablename;
+- how many datas or table rows in the table(fieldname exclude)
+
+select count(*) as total_rows from tablename;
+- as = alias = fieldname
+
+select min (fieldname)
+- lowest value in the specific fieldname
+
+select max (fieldname)
+- highest value in the specific fieldname
+
+select sum(fieldname)
+- sum of the value in the specific fieldname
+
+select avg(fieldname)
+- avg of the value in the specific fieldname
+
+select count(*), min(), max(), sum(), avg() from tablename;
+
+select * from tablename order by fieldname;
+- sort the table depends on specific fieldname. default is ascending. put desc if needed
+
+select * from tablename group by fieldname;
+- show all datas with different values according to fieldname
+
+select city, count(*) from tablename group by city;
+- it will show city and count as fieldname and how many data for every cities in table
+
+select date(now());
+- today's date (yy-mm-dd)
+
+select now();
+- today's date + time(hour:minute:second)
+
+select date_format(date_now(), '%d/%m/%y');
+- the dates will be dd/mm/yy
+
+select bod, date_format((bod), '%d/%m/%y') from tablename;
+- if you want change date format in your table. bod is birth of date
+
+update tablename set fieldname=newvalue where fieldname=value;
+- change into new value in fieldname field for every data in specific fieldname and value
+
+update tablename set
+-> name='A', age=20 where id=1;
+
+delete tablename where fieldname='';
+- delete the specific data depends on value in fieldname
+
+delete tablename / drop tablename;
+- delete the whole table
+
+drop database databasename;
+- delete the database
